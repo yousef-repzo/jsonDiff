@@ -1,21 +1,21 @@
 {
-  "name": "jsondiffpatch",
+  "name": "jsondiff",
   "version": "0.4.1",
   "author": "Benjamin Eidelman <beneidel@gmail.com>",
   "description": "Diff & Patch for Javascript objects",
   "contributors": [
     "Benjamin Eidelman <beneidel@gmail.com>"
   ],
-  "browser": "dist/jsondiffpatch.umd.js",
-  "main": "dist/jsondiffpatch.cjs.js",
-  "module": "dist/jsondiffpatch.esm.js",
+  "browser": "dist/jsondiff.umd.js",
+  "main": "dist/jsondiff.cjs.js",
+  "module": "dist/jsondiff.esm.js",
   "types": "./dist/index",
   "files": [
     "dist",
     "bin"
   ],
   "bin": {
-    "jsondiffpatch": "./bin/jsondiffpatch"
+    "jsondiff": "./bin/jsondiff"
   },
   "scripts": {
     "build": "rollup -c",
@@ -31,7 +31,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/benjamine/jsondiffpatch.git"
+    "url": "https://github.com/yousef-repzo/jsonDiff.git"
   },
   "keywords": [
     "json",
@@ -82,5 +82,5 @@
   "engines": {
     "node": ">=8.17.0"
   },
-  "homepage": "https://github.com/benjamine/jsondiffpatch"
+  "homepage": "https://github.com/yousef-repzo/jsonDiff"
 }
