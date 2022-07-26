@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const jsondiffpatch = require('..');
+const jsondiffpatch = require('../dist');
 
 const fs = require('fs');
 
@@ -8,7 +8,7 @@ const fileLeft = process.argv[2];
 const fileRight = process.argv[3];
 
 if (!fileLeft || !fileRight) {
-  console.log('\n  USAGE: jsondiffpatch left.json right.json');
+  console.log('\n  USAGE: jsondiff left.json right.json');
   return;
 }
 

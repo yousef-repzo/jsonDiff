@@ -2,14 +2,14 @@
  * mocha's bdd syntax is inspired in RSpec
  *   please read: http://betterspecs.org/
  */
-import * as jsondiffpatch from '../build/jsondiffpatch.esm';
+import * as jsondiffpatch from '../build/jsondiff.esm';
 import examples from './examples/diffpatch';
 import chai from 'chai';
 
 import lcs from '../src/filters/lcs';
 const expect = chai.expect;
 
-describe('jsondiffpatch', () => {
+describe('jsondiff', () => {
   before(() => {});
   it('has a diff method', () => {
     expect(jsondiffpatch.diff).to.be.a('function');
