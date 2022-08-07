@@ -27,7 +27,7 @@ Diff & patch JavaScript objects
     - console (colored), try running ```./node_modules/.bin/jsondiffpatch left.json right.json```
     - JSON Patch format RFC 6902 support
     - write your own! check [Formatters documentation](docs/formatters.md)
-- BONUS: `jsondiffpatch.clone(obj)` (deep clone)
+- BONUS: `jsondiff99.clone(obj)` (deep clone)
 
 Supported platforms
 ----------------
@@ -53,14 +53,14 @@ Usage
     };
 
     // clone country, using dateReviver for Date objects
-    var country2 = JSON.parse(JSON.stringify(country), jsondiffpatch.dateReviver);
+    var country2 = JSON.parse(JSON.stringify(country), jsondiff99.dateReviver);
 
     // make some changes
     country2.name = "Republica Argentina";
     country2.population = 41324992;
     delete country2.capital;
 
-    var delta = jsondiffpatch.diff(country, country2);
+    var delta = jsondiff99.diff(country, country2);
 
     assertSame(delta, {
         "name":["Argentina","Republica Argentina"], // old value, new value
@@ -69,13 +69,13 @@ Usage
     });
 
     // patch original
-    jsondiffpatch.patch(country, delta);
+    jsondiff99.patch(country, delta);
 
     // reverse diff
-    var reverseDelta = jsondiffpatch.reverse(delta);
-    // also country2 can be return to original value with: jsondiffpatch.unpatch(country2, delta);
+    var reverseDelta = jsondiff99.reverse(delta);
+    // also country2 can be return to original value with: jsondiff99.unpatch(country2, delta);
 
-    var delta2 = jsondiffpatch.diff(country, country2);
+    var delta2 = jsondiff99.diff(country, country2);
     assert(delta2 === undefined)
     // undefined => no difference
 ```
@@ -127,7 +127,7 @@ Array diffing:
     country.cities.push(rosario);
 
     // create a configured instance, match objects by name
-    var diffpatcher = jsondiffpatch.create({
+    var diffpatcher = jsondiff99.create({
         objectHash: function(obj) {
             return obj.name;
         }
@@ -176,11 +176,11 @@ Installing
 This works for node, or in browsers if you already do bundling on your app
 
 ``` sh
-npm install jsondiffpatch
+npm install jsondiff99
 ```
 
 ``` js
-var jsondiffpatch = require('jsondiffpatch').create(options);
+var jsondiff99 = require('jsondiff99').create(options);
 ```
 
 ### browser
@@ -216,7 +216,7 @@ var jsondiffpatch = require('jsondiffpatch').create({
       return name.slice(0, 1) !== '$';
     },
     cloneDiffValues: false /* default false. if true, values in the obtained delta will be cloned
-      (using jsondiffpatch.clone by default), to ensure delta keeps no references to left or right objects. this becomes useful if you're diffing and patching the same objects multiple times without serializing deltas.
+      (using jsondiff99.clone by default), to ensure delta keeps no references to left or right objects. this becomes useful if you're diffing and patching the same objects multiple times without serializing deltas.
       instead of true, a function can be specified here to provide a custom clone(value)
       */
 });
@@ -229,7 +229,7 @@ Visual Diff
 <!DOCTYPE html>
 <html>
     <head>
-        <script type='text/javascript' src="https://cdn.jsdelivr.net/npm/jsondiffpatch/dist/jsondiffpatch.umd.min.js"></script>
+        <script type='text/javascript' src="https://cdn.jsdelivr.net/npm/jsondiff99/dist/jsondiff99.umd.min.js"></script>
         <link rel="stylesheet" href="./style.css" type="text/css" />
         <link rel="stylesheet" href="../formatters-styles/html.css" type="text/css" />
         <link rel="stylesheet" href="../formatters-styles/annotated.css" type="text/css" />
@@ -241,13 +241,13 @@ Visual Diff
         <script>
             var left = { a: 3, b: 4 };
             var right = { a: 5, c: 9 };
-            var delta = jsondiffpatch.diff(left, right);
+            var delta = jsondiff99.diff(left, right);
 
             // beautiful html diff
-            document.getElementById('visual').innerHTML = jsondiffpatch.formatters.html.format(delta, left);
+            document.getElementById('visual').innerHTML = jsondiff99.formatters.html.format(delta, left);
 
             // self-explained json
-            document.getElementById('annotated').innerHTML = jsondiffpatch.formatters.annotated.format(delta, left);
+            document.getElementById('annotated').innerHTML = jsondiff99.formatters.annotated.format(delta, left);
         </script>
     </body>
 </html>
@@ -262,12 +262,12 @@ Console
 
 ``` sh
 # diff two json files, colored output (using chalk lib)
-./node_modules/.bin/jsondiffpatch ./left.json ./right.json
+./node_modules/.bin/jsondiff99 ./left.json ./right.json
 
 # or install globally
-npm install -g jsondiffpatch
+npm install -g jsondiff99
 
-jsondiffpatch ./demo/left.json ./demo/right.json
+jsondiff99 ./demo/left.json ./demo/right.json
 ```
 
 ![console_demo!](docs/demo/consoledemo.png)
